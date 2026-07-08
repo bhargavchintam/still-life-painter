@@ -5,7 +5,7 @@ A 3D art-studio painting minigame built with **Panda3D**. The screen is split: a
 and a painting canvas with a fruit selector, colour palette and brush-size slider
 on the right. Orbit the camera around the fruit and paint what you see.
 
-![studio](media/still_life.png)
+![gameplay](media/still_life_gameplay.gif)
 
 ## Features
 - Split-screen: live 3D studio + a paintable 2D canvas.
