@@ -50,6 +50,7 @@ loadPrcFileData("", "window-title Still Life Painter")
 # the path in Panda's forward-slash form, which loadModel/loadTexture expect.
 _HERE = Filename.fromOsSpecific(os.path.dirname(os.path.abspath(__file__)))
 ASSET_DIR = f"{_HERE}/assets"        # folder holding the .glb files and textures
+_ASSET_DIR_OS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 SPLIT = 0.6                          # left fraction of the window used by the 3D scene
 A = WIN_W / float(WIN_H)             # aspect2d half-width (x runs from -A to +A)
 
@@ -93,6 +94,27 @@ PALETTE_HEX = [
     "000000", "1D2B53", "7E2553", "008751", "AB5236", "5F574F", "C2C3C7", "FFF1E8",
     "FF004D", "FFA300", "FFEC27", "00E436", "29ADFF", "83769C", "FF77A8", "FFCCAA",
 ]
+
+# CC0 Poly Haven assets the README asks the player to download separately
+# (not bundled in the repo). Mirrors every loadModel/loadTexture path below.
+REQUIRED_ASSETS = [
+    "plank_flooring_04_diff_4k.jpg",
+    "brick_wall_10_diff_4k.jpg",
+    "wooden_stool_01_4k.glb",
+    "carved_wooden_plate_4k.glb",
+    *FRUITS,
+]
+
+
+def _check_required_assets():
+    missing = [p for p in REQUIRED_ASSETS if not os.path.isfile(os.path.join(_ASSET_DIR_OS, p))]
+    if missing:
+        print("Still Life Painter can't start: required asset file(s) are missing:")
+        for p in missing:
+            print(f"  - {p} (expected at {os.path.join(_ASSET_DIR_OS, p)})")
+        print('\nThese CC0 Poly Haven assets aren\'t bundled with this repo. See the '
+              '"Assets" note at the top of this file for where to get them.')
+        sys.exit(1)
 
 
 def hex_to_rgb(h):
@@ -497,4 +519,5 @@ class StillLifePainter(ShowBase):
 
 
 if __name__ == "__main__":
+    _check_required_assets()
     StillLifePainter().run()
