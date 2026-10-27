@@ -48,3 +48,8 @@ Poly Haven ID):
 ## Tech
 Panda3D · `panda3d-gltf` (glTF/GLB model loading) · DirectGUI · render-to-texture
 canvas · orbit camera.
+
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md), including how to add a fruit. CI checks
+that the game and its dependencies install and import on every push and pull
+request (it cannot open the studio without the assets).
