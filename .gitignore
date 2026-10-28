@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 heightmap.png
+
+# Poly Haven files downloaded by scripts/fetch_assets.py
+/assets
