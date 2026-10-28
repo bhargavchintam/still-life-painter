@@ -26,16 +26,22 @@ on the right. Orbit the camera around the fruit and paint what you see.
 ## Run
 ```bash
 pip install panda3d panda3d-gltf
+python scripts/fetch_assets.py
 python still_life_painter.py
 ```
-First put the Poly Haven files listed below in an `assets/` folder next to
-`still_life_painter.py`. If a file is missing, the game lists it and exits.
+`scripts/fetch_assets.py` downloads the 10 Poly Haven files listed below
+(95.7 MB) into an `assets/` folder next to `still_life_painter.py`. It skips
+files you already have; `--dry-run` lists the files and sizes, and `--force`
+downloads them again. If a file is missing, the game lists it and exits.
 
 ## A note on assets
 The studio models and textures are **CC0** from [Poly Haven](https://polyhaven.com)
-(fruit `.glb` models, wood/brick textures). They are **not bundled** in this repo —
-download the CC0 originals from Poly Haven and place the `.glb` models and textures
-in an `assets/` folder next to `still_life_painter.py`.
+(fruit models, wood/brick textures). They are **not bundled** in this repo.
+`scripts/fetch_assets.py` gets them through the Poly Haven API (Powered by Poly
+Haven) and checks each file against the MD5 the API lists for it. Poly Haven
+serves the models as glTF (a `.gltf` file, a `.bin` buffer and `.jpg`
+textures), and the game loads `.glb`, so the script packs each model's files
+into one `.glb`. It needs only the Python standard library.
 
 The game looks for these files in `assets/` (each name starts with the asset's
 Poly Haven ID):
@@ -50,6 +56,7 @@ Panda3D · `panda3d-gltf` (glTF/GLB model loading) · DirectGUI · render-to-tex
 canvas · orbit camera.
 
 ## Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md), including how to add a fruit. CI checks
-that the game and its dependencies install and import on every push and pull
-request (it cannot open the studio without the assets).
+See [CONTRIBUTING.md](CONTRIBUTING.md), including how to add a fruit. On every
+push and pull request, CI runs the unit tests (offline tests of the asset
+script) and checks that the game and its dependencies install and import. It
+does not download the assets, so it cannot open the studio.
