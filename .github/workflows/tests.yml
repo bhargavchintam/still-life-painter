@@ -19,12 +19,11 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install panda3d pytest -r requirements.txt
-      # There are no unit tests yet. pytest exits with code 5 when it finds
-      # no tests, so allow that; any tests added later will run here.
+      # Offline tests of scripts/fetch_assets.py (nothing is downloaded).
       - name: Run the unit tests
-        run: python -m pytest || [ $? -eq 5 ]
-      # The game needs the Poly Haven models and textures, which are not in
-      # the repo, so CI cannot open the studio. It only checks that the game
-      # module and the glTF loader import cleanly.
+        run: python -m pytest -q
+      # CI does not download the Poly Haven models and textures, so it cannot
+      # open the studio. It only checks that the game module and the glTF
+      # loader import cleanly.
       - name: Check that the game and its dependencies import
         run: python -c "import gltf, still_life_painter"

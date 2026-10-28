@@ -14,12 +14,13 @@ Controls
   Left mouse   hold and drag on the canvas to paint
   ESCAPE       pause menu (Resume / Clear Canvas / Exit)
 
-Assets are CC0 models/textures from Poly Haven (polyhaven.com). Put the .glb
-models and textures in an "assets" folder next to this file (or change ASSET_DIR
-below). They are not bundled in this repo; download the CC0 originals from
-Poly Haven.
+Assets are CC0 models/textures from Poly Haven (polyhaven.com), in an "assets"
+folder next to this file (or change ASSET_DIR below). They are not bundled in
+this repo; python scripts/fetch_assets.py downloads them and packs each model
+into the .glb this file loads.
 
-Run:  python still_life_painter.py   (needs:  pip install panda3d panda3d-gltf)
+Run:  python scripts/fetch_assets.py   (once; about 96 MB)
+      python still_life_painter.py   (needs:  pip install panda3d panda3d-gltf)
 """
 
 import os
@@ -112,8 +113,8 @@ def _check_required_assets():
         print("Still Life Painter can't start: required asset file(s) are missing:")
         for p in missing:
             print(f"  - {p} (expected at {os.path.join(_ASSET_DIR_OS, p)})")
-        print('\nThese CC0 Poly Haven assets aren\'t bundled with this repo. See the '
-              '"Assets" note at the top of this file for where to get them.')
+        print("\nThese CC0 Poly Haven assets aren't bundled with this repo. "
+              "Download them with:  python scripts/fetch_assets.py")
         sys.exit(1)
 
 
